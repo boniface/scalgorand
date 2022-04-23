@@ -1,0 +1,6 @@
+Scala Algorand Library
+
+Links:
+
+ - [[https://boniface.github.io/scalgorand/ Homepage]]
+ - [[https://github.com/boniface/scalgorand GitHub repository]]
