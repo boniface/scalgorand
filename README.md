@@ -23,7 +23,7 @@ Algorand is an open-source blockchain, meaning that anyone can view and contribu
 to the platform's code. Algorand uses an operating protocol called pure proof-of-stake (PPoS),
 which recruits network operators from the entire pool of ALGO coin holders.
 
-# SCALGORAND
+# The Library
 
 Scalgorand is a Scala Algorand Library 
  for communicating and interacting with the 
