@@ -17,11 +17,6 @@
 
 package scalgorand
 
-trait Scalgorand {
+trait Scalgorand {}
 
-}
-
-object Scalgorand{
-
-
-}
+object Scalgorand {}
