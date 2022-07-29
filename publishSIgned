@@ -1,0 +1,9 @@
+[info] welcome to sbt 1.7.1 (Oracle Corporation Java 17.0.1)
+[info] loading global plugins from /home/hashcode/.sbt/1.0/plugins
+[info] loading settings for project scalgorand-build from plugins.sbt ...
+[info] loading project definition from /home/hashcode/projects/algo/scalgorand/project
+
+[warn] Canceling execution...
+[error] Cancelled: loadp
+[error] Use 'last' for the full log.
+[warn] Project loading failed: (r)etry, (q)uit, (l)ast, or (i)gnore? (default: r)

@@ -20,4 +20,5 @@ addSbtPlugin("com.timushev.sbt"          % "sbt-updates"                   % "0.
 addSbtPlugin("io.spray"                  % "sbt-revolver"                  % "0.9.1")
 addSbtPlugin("com.codecommit"            % "sbt-github-actions"            % "0.14.2")
 addSbtPlugin("ch.epfl.scala"             % "sbt-scala3-migrate"            % "0.5.1")
-addSbtPlugin("com.github.sbt"            % "sbt-ci-release"                % "1.5.10")
+addSbtPlugin("com.github.sbt"            % "sbt-pgp"                       % "2.1.2")
+addSbtPlugin("org.xerial.sbt"            % "sbt-sonatype"                  % "2.3")

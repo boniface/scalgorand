@@ -25,11 +25,6 @@ addCommandAlias("release", ";+clean ;ci-release ;unidoc ;site/publishMicrosite")
 // ---------------------------------------------------------------------------
 // Dependencies
 
-/** Library for property-based testing:
-  * [[https://www.scalacheck.org/]]
-  */
-val ScalaCheckVersion = "1.15.4"
-
 /** Compiler plugin for working with partially applied types:
   * [[https://github.com/typelevel/kind-projector]]
   */
