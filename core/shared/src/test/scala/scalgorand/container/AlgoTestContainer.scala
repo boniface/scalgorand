@@ -1,17 +1,12 @@
 package scalgorand.container
 
 import com.dimafeng.testcontainers.{DockerComposeContainer, ExposedService}
+import scalgorand.environment.connection.AlgoNet
 import zio.{Scope, Task, ULayer, URIO, ZIO, ZLayer}
 
 import java.io.File
 
-trait AlgoTestContainer {
-  def getAlgoHost: Task[String]
-  def getAlgoPort: Task[Int]
-  def getKmdHost: Task[String]
-  def getKmdPort: Task[Int]
-  def getIndexerHost: Task[String]
-  def getIndexPort: Task[Int]
+trait AlgoTestContainer extends AlgoNet{
 
 }
 object AlgoTestContainer {
@@ -20,8 +15,9 @@ object AlgoTestContainer {
       DockerComposeContainer(
         new File("core/shared/src/test/resources/docker-compose.yml"),
         exposedServices =
-          Seq(ExposedService("algod_1", 4001), ExposedService("algod_1", 4002), ExposedService("indexer_1", 8980)),
-      )
+          Seq(ExposedService("algod_1", 4001),
+            ExposedService("algod_1", 4002),
+            ExposedService("indexer_1", 8980)))
 
     ZIO
       .acquireRelease(ZIO.succeed(container.start()))(_ => ZIO.succeed(container.stop()))
