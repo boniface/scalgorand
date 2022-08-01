@@ -7,28 +7,24 @@ import sttp.client3._
 import sttp.client3.ziojson.asJson
 import zio._
 
-case class GeneralAPIImpl(sttpBackend: SttpBackend[Task, Any]) extends GeneralAPI {
+final case class GeneralAPIImpl(sttpBackend: SttpBackend[Task, Any]) extends GeneralAPI {
   override def getGenesis: ZIO[Any, Option[GeneralAPIError], Genesis] = {
     val request = basicRequest
       .response(asJson[Genesis])
       .get(uri"http://localhost:4001/genesis")
-    val result  = sttpBackend
+    val result: ZIO[Any, GeneralAPIError, Either[ResponseException[String, String], Genesis]] = sttpBackend
       .send(request)
       .mapBoth(
         error => GeneralAPIError(error),
         result => result.body,
       )
     result.flatMap {
-      case Left(value)  => ZIO.none
+      case Left(_)  => ZIO.none
       case Right(value) => ZIO.some(value)
     }.some
   }
 
-  override def getHealth: Unit = ???
 
-  override def getVersion: Unit = ???
-
-  override def getMetrics: Unit = ???
 }
 
 object GeneralAPIImpl {

@@ -14,7 +14,7 @@ object TestExampleSpec extends DataTest{
       test(" Test Application IO") {
         for {
           client <-ZIO.service[AlgoTestContainer].debug(trace)
-           hello <-client.getAlgoPort
+
 
 
         } yield

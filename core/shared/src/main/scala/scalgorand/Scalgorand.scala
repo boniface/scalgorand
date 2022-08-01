@@ -17,6 +17,8 @@
 
 package scalgorand
 
-trait Scalgorand {}
+trait Scalgorand {
+  def login(token:String): String
+}
 
 object Scalgorand {}

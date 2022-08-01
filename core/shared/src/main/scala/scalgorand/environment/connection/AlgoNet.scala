@@ -1,9 +1,8 @@
 package scalgorand.environment.connection
 
 import zio.Task
-import zio.macros.accessible
 
-@accessible
+
 trait AlgoNet {
   def getAlgoHost: Task[String]
   def getAlgoPort: Task[Int]
