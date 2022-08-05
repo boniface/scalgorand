@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-package scalgorand.domain.accounts
+package scalgorand.domain.node
 
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
-case class NodeStatus (
+case class Status(
   catchpoint: String,
   catchPointAcquiredBlocks: Long,
   catchPointProcessedAccounts: Long,
@@ -36,8 +36,8 @@ case class NodeStatus (
   timeSinceLastRound: Long
 )
 
-object NodeStatus {
-  private type JsonEntity = NodeStatus
+object Status {
+  private type JsonEntity = Status
   implicit val decoder: JsonDecoder[JsonEntity] = DeriveJsonDecoder.gen[JsonEntity]
   implicit val encoder: JsonEncoder[JsonEntity] = DeriveJsonEncoder.gen[JsonEntity]
 }
