@@ -20,13 +20,13 @@ package scalgorand.domain.node
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class Status(
-  catchpoint: String,
-  catchPointAcquiredBlocks: Long,
-  catchPointProcessedAccounts: Long,
-  catchPointTotalAccounts: Long,
-  catchPointVErifiedAccounts: Long,
+  catchpoint: Option[String],
+  catchPointAcquiredBlocks: Option[Long],
+  catchPointProcessedAccounts: Option[Long],
+  catchPointTotalAccounts: Option[Long],
+  catchPointVerifiedAccounts: Option[Long],
   catchPointTime: Long,
-  lastCatchPoint: String,
+  lastCatchPoint: Option[String],
   lastRound: String,
   lastVersion: String,
   nextVersion: String,
