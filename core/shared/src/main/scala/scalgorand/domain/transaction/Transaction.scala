@@ -37,7 +37,14 @@ case class Transaction(
   txtype: String,
   sender: Option[Address],
   xferAssetId: Option[BigInt],
-  assetAmount: Option[BigInt]
+  assetAmount: Option[BigInt],
+  assetSender: Option[Address],
+  assetReciever: Option[Address],
+  assetCloseTo: Option[Address],
+  freezeTarget: Option[Address],
+  assetFreezeId: Option[Address],
+  assetFreezeState: Option[Boolean],
+  applicationArgs: List[Array[Byte]]
   )
 
 object Transaction {

@@ -6,9 +6,9 @@ import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class SignedTransaction(
   tx: Transaction,
-  sig: Signature,
-  mSig: MultiSigSignature,
-  lSig: LogicSigSignature,
+  sig: Option[Signature],
+  mSig: Option[MultiSigSignature],
+  lSig: Option[LogicSigSignature],
   authAdd: Address
 )
 
