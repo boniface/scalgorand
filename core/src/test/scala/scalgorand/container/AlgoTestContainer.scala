@@ -13,7 +13,7 @@ object AlgoTestContainer {
   def apply: URIO[Scope, AlgoTestContainer] = {
     val container: DockerComposeContainer =
       DockerComposeContainer(
-        new File("core/shared/src/test/resources/docker-compose.yml"),
+        new File("core/src/test/resources/docker-compose.yml"),
         exposedServices =
           Seq(ExposedService("algod_1", 4001),
             ExposedService("algod_1", 4002),
