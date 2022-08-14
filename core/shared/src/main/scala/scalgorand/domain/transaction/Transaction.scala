@@ -15,29 +15,40 @@
  * limitations under the License.
  */
 
-package scalgorand.domain.node
+package scalgorand.domain.transaction
 
+import scalgorand.domain.accounts.Address
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
-case class Status(
-  catchpoint: Option[String],
-  catchPointAcquiredBlocks: Option[Long],
-  catchPointProcessedAccounts: Option[Long],
-  catchPointTotalAccounts: Option[Long],
-  catchPointVerifiedAccounts: Option[Long],
-  catchPointTime: Long,
-  lastCatchPoint: Option[String],
-  lastRound: String,
-  lastVersion: String,
-  nextVersion: String,
-  nextVersionRound: Long,
-  nextVersionSupported: Boolean,
-  stoppedAtUnsupportedRound: Boolean,
-  timeSinceLastRound: Long
-)
+case class Transaction(
+  fee: BigInt,
+  firstRound: BigInt,
+  from: String,
+  fromRewards: BigInt,
+  genesisId: String,
+  genesisHash: Byte,
+  lastRound: BigInt,
+  noteB64: Byte,
+  payment: PaymentTransactionType,
+  poolError: String,
+  round: BigInt,
+  tx: String,
+  createdAssets: BigInt,
+  txtype: String,
+  sender: Option[Address],
+  xferAssetId: Option[BigInt],
+  assetAmount: Option[BigInt],
+  assetSender: Option[Address],
+  assetReciever: Option[Address],
+  assetCloseTo: Option[Address],
+  freezeTarget: Option[Address],
+  assetFreezeId: Option[Address],
+  assetFreezeState: Option[Boolean],
+  applicationArgs: List[Array[Byte]]
+  )
 
-object Status {
-  private type JsonEntity = Status
+object Transaction {
+  private type JsonEntity = Transaction
   implicit val decoder: JsonDecoder[JsonEntity] = DeriveJsonDecoder.gen[JsonEntity]
   implicit val encoder: JsonEncoder[JsonEntity] = DeriveJsonEncoder.gen[JsonEntity]
 }
