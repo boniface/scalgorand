@@ -19,28 +19,13 @@ package scalgorand.domain.transaction
 
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
-case class Transaction(
-  fee: BigInt,
-  firstRound: BigInt,
-  from: String,
-  fromRewards: BigInt,
-  genesisId: String,
-  genesisHash: Byte,
-  lastRound: BigInt,
-  noteB64: Byte,
-  payment: PaymentTransactionType,
-  poolError: String,
-  round: BigInt,
-  tx: String,
-  createdAssets: BigInt,
-  txtype: String,
-  sender: Option[String],
-  xferAssetId: Option[BigInt],
-  assetAmount: Option[BigInt]
-  )
+case class AccountStateDelta(
+  address: String,
+  delta: List[EvalDeltaKeyValue]
+)
 
-object Transaction {
-  private type JsonEntity = Transaction
+object AccountStateDelta {
+  private type JsonEntity = AccountStateDelta
   implicit val decoder: JsonDecoder[JsonEntity] = DeriveJsonDecoder.gen[JsonEntity]
   implicit val encoder: JsonEncoder[JsonEntity] = DeriveJsonEncoder.gen[JsonEntity]
 }
