@@ -1,136 +1,251 @@
-import BuildKeys._
-
-import com.github.tkawachi.doctest.DoctestPlugin.DoctestTestFramework
-import com.github.tkawachi.doctest.DoctestPlugin.autoImport._
-import sbt._
+import explicitdeps.ExplicitDepsPlugin.autoImport._
 import sbt.Keys._
-import sbtunidoc.BaseUnidocPlugin.autoImport.{unidoc, unidocProjectFilter}
-import sbtunidoc.ScalaUnidocPlugin.autoImport.ScalaUnidoc
+import sbt._
+import sbtbuildinfo.BuildInfoKeys._
+import sbtbuildinfo._
+import scalafix.sbt.ScalafixPlugin.autoImport._
 
-import scala.util.matching.Regex
-import scala.xml.Elem
-import scala.xml.transform.{RewriteRule, RuleTransformer}
 
 object Boilerplate {
-  /**
-    * Applies [[filterOutDependencyFromGeneratedPomXml]] to a list of multiple dependencies.
-    */
-  def filterOutMultipleDependenciesFromGeneratedPomXml(list: List[(String, Regex)]*) =
-    list.foldLeft(List.empty[Def.Setting[_]]) { (acc, elem) =>
-      acc ++ filterOutDependencyFromGeneratedPomXml(elem:_*)
+  private val versions: Map[String, String] = {
+    import org.snakeyaml.engine.v2.api.{Load, LoadSettings}
+
+    import java.util.{List => JList, Map => JMap}
+    import scala.jdk.CollectionConverters._
+
+    val doc = new Load(LoadSettings.builder().build())
+      .loadFromReader(scala.io.Source.fromFile(".github/workflows/ci.yml").bufferedReader())
+    val yaml = doc.asInstanceOf[JMap[String, JMap[String, JMap[String, JMap[String, JMap[String, JList[String]]]]]]]
+    val list = yaml.get("jobs").get("test").get("strategy").get("matrix").get("scala").asScala
+    list.map { v =>
+      val vs = v.split('.');
+      val init = vs.take(vs(0) match { case "2" => 2; case _ => 1 }); (init.mkString("."), v)
+    }.toMap
+  }
+  val Scala211: String = versions("2.11")
+  val Scala212: String = versions("2.12")
+  val Scala213: String = versions("2.13")
+  val Scala3: String = versions("3")
+
+  val SilencerVersion = "1.7.8"
+
+  private val stdOptions = Seq(
+    "-deprecation",
+    "-encoding",
+    "UTF-8",
+    "-feature",
+    "-unchecked"
+  ) ++ {
+    if (sys.env.contains("CI")) {
+      Seq("-Xfatal-warnings")
+    } else {
+      Nil // to enable Scalafix locally
     }
+  }
 
-  /**
-    * Filter out dependencies from the generated `pom.xml`.
-    *
-    * E.g. to exclude Scoverage:
-    * {{{
-    *   filterOutDependencyFromGeneratedPomXml("groupId" -> "org.scoverage")
-    * }}}
-    *
-    * Or to exclude based on both `groupId` and `artifactId`:
-    * {{{
-    *   filterOutDependencyFromGeneratedPomXml("groupId" -> "io\.estatico".r, "artifactId" -> "newtype".r)
-    * }}}
-    */
-  def filterOutDependencyFromGeneratedPomXml(conditions: (String, Regex)*) = {
-    def shouldExclude(e: Elem) =
-      e.label == "dependency" && {
-        conditions.forall { case (key, regex) =>
-          e.child.exists(child => child.label == key && regex.findFirstIn(child.text).isDefined)
-        }
-      }
+  private val std2xOptions = Seq(
+    "-language:higherKinds",
+    "-language:existentials",
+    "-explaintypes",
+    "-Yrangepos",
+    "-Xlint:_,-missing-interpolator,-type-parameter-shadow",
+    "-Ywarn-numeric-widen",
+    "-Ywarn-value-discard"
+  )
 
-    if (conditions.isEmpty) Nil else {
+  private def optimizerOptions(optimize: Boolean) =
+    if (optimize)
       Seq(
-        // For evicting Scoverage out of the generated POM
-        // See: https://github.com/scoverage/sbt-scoverage/issues/153
-        pomPostProcess := { (node: xml.Node) =>
-          new RuleTransformer(new RewriteRule {
-            override def transform(node: xml.Node): Seq[xml.Node] = node match {
-              case e: Elem if shouldExclude(e) => Nil
-              case _ => Seq(node)
-            }
-          }).transform(node).head
-        },
+        "-opt:l:inline",
+        "-opt-inline-from:zio.internal.**"
       )
-    }
-  }
+    else Nil
 
-  /**
-    * For working with Scala version-specific source files, allowing us to
-    * use 2.12 or 2.13 specific APIs.
-    */
-  lazy val crossVersionSharedSources: Seq[Setting[_]] = {
-    def scalaPartV = Def setting (CrossVersion partialVersion scalaVersion.value)
-    Seq(Compile, Test).map { sc =>
-      (sc / unmanagedSourceDirectories) ++= {
-        (sc / unmanagedSourceDirectories).value.flatMap { dir =>
-          Seq(
-            scalaPartV.value match {
-              case Some((2, y)) if y == 11 => Seq(new File(dir.getPath + "-2.11"))
-              case Some((2, y)) if y == 12 => Seq(new File(dir.getPath + "-2.12"))
-              case Some((2, y)) if y == 13 => Seq(new File(dir.getPath + "-2.13"))
-              case _                       => Nil
-            },
+  def buildInfoSettings(packageName: String) =
+    Seq(
+      buildInfoKeys := Seq[BuildInfoKey](organization, moduleName, name, version, scalaVersion, sbtVersion, isSnapshot),
+      buildInfoPackage := packageName
+    )
 
-            scalaPartV.value match {
-              case Some((2, n)) if n > 12  => Seq(new File(dir.getPath + "-2.12+"))
-              case Some((2, n)) if n == 12 => Seq(new File(dir.getPath + "-2.12+"), new File(dir.getPath + "-2.12-"))
-              case Some((2, n)) if n < 12  => Seq(new File(dir.getPath + "-2.12-"))
-              case _                       => Nil
-            },
-
-            scalaPartV.value match {
-              case Some((2, n)) if n > 13  => Seq(new File(dir.getPath + "-2.13+"))
-              case Some((2, n)) if n == 13 => Seq(new File(dir.getPath + "-2.13+"), new File(dir.getPath + "-2.13-"))
-              case Some((2, n)) if n < 13  => Seq(new File(dir.getPath + "-2.13-"))
-              case _                       => Nil
-            },
-          ).flatten
-        }
+  val dottySettings = Seq(
+    crossScalaVersions += Scala3,
+    scalacOptions --= {
+      if (scalaVersion.value == Scala3)
+        Seq("-Xfatal-warnings")
+      else
+        Seq()
+    },
+    Compile / doc / sources := {
+      val old = (Compile / doc / sources).value
+      if (scalaVersion.value == Scala3) {
+        Nil
+      } else {
+        old
+      }
+    },
+    Test / parallelExecution := {
+      val old = (Test / parallelExecution).value
+      if (scalaVersion.value == Scala3) {
+        false
+      } else {
+        old
       }
     }
+  )
+
+  def makeReplSettings(initialCommandsStr: String) =
+    Seq(
+      // In the repl most warnings are useless or worse.
+      // This is intentionally := as it's more direct to enumerate the few
+      // options we do want than to try to subtract off the ones we don't.
+      // One of -Ydelambdafy:inline or -Yrepl-class-based must be given to
+      // avoid deadlocking on parallel operations, see
+      //   https://issues.scala-lang.org/browse/SI-9076
+      Compile / console / scalacOptions := Seq(
+        "-Ypartial-unification",
+        "-language:higherKinds",
+        "-language:existentials",
+        "-Yno-adapted-args",
+        "-Xsource:2.13",
+        "-Yrepl-class-based"
+      ),
+      Compile / console / initialCommands := initialCommandsStr
+    )
+
+  def extraOptions(scalaVersion: String, optimize: Boolean) =
+    CrossVersion.partialVersion(scalaVersion) match {
+      case Some((3, 0)) =>
+        Seq(
+          "-language:implicitConversions",
+          "-Xignore-scala2-macros"
+        )
+      case Some((2, 13)) =>
+        Seq(
+          "-Ywarn-unused:params,-implicits"
+        ) ++ std2xOptions ++ optimizerOptions(optimize)
+      case Some((2, 12)) =>
+        Seq(
+          "-opt-warnings",
+          "-Ywarn-extra-implicit",
+          "-Ywarn-unused:_,imports",
+          "-Ywarn-unused:imports",
+          "-Ypartial-unification",
+          "-Yno-adapted-args",
+          "-Ywarn-inaccessible",
+          "-Ywarn-infer-any",
+          "-Ywarn-nullary-override",
+          "-Ywarn-nullary-unit",
+          "-Ywarn-unused:params,-implicits",
+          "-Xfuture",
+          "-Xsource:2.13",
+          "-Xmax-classfile-name",
+          "242"
+        ) ++ std2xOptions ++ optimizerOptions(optimize)
+      case Some((2, 11)) =>
+        Seq(
+          "-Ypartial-unification",
+          "-Yno-adapted-args",
+          "-Ywarn-inaccessible",
+          "-Ywarn-infer-any",
+          "-Ywarn-nullary-override",
+          "-Ywarn-nullary-unit",
+          "-Xexperimental",
+          "-Ywarn-unused-import",
+          "-Xfuture",
+          "-Xsource:2.13",
+          "-Xmax-classfile-name",
+          "242"
+        ) ++ std2xOptions
+      case _ => Seq.empty
+    }
+
+  def platformSpecificSources(platform: String, conf: String, baseDirectory: File)(versions: String*) =
+    for {
+      platform <- List("shared", platform)
+      version <- "scala" :: versions.toList.map("scala-" + _)
+      result = baseDirectory.getParentFile / platform.toLowerCase / "src" / conf / version
+      if result.exists
+    } yield result
+
+  def crossPlatformSources(scalaVer: String, platform: String, conf: String, baseDir: File) = {
+    val versions = CrossVersion.partialVersion(scalaVer) match {
+      case Some((2, 11)) =>
+        List("2.11+", "2.11-2.12")
+      case Some((2, 12)) =>
+        List("2.11+", "2.12+", "2.11-2.12", "2.12-2.13")
+      case Some((2, 13)) =>
+        List("2.11+", "2.12+", "2.13+", "2.12-2.13")
+      case Some((3, _)) =>
+        List("2.11+", "2.12+", "2.13+")
+      case _ =>
+        List()
+    }
+    platformSpecificSources(platform, conf, baseDir)(versions: _*)
   }
 
-  /**
-    * Skip publishing artifact for this project.
-    */
-  lazy val doNotPublishArtifact = Seq(
-    publish / skip := true,
-    publish := (()),
-    publishLocal := (()),
-    publishArtifact := false,
-    publishTo := None
-  )
+  def stdSettings(prjName: String) =
+    Seq(
+      name := s"$prjName",
+      crossScalaVersions := Seq(Scala211, Scala212, Scala213),
+      ThisBuild / scalaVersion := Scala213,
+      scalacOptions := stdOptions ++ extraOptions(scalaVersion.value, optimize = !isSnapshot.value),
+      libraryDependencies ++= {
+        if (scalaVersion.value == Scala3)
+          Seq(
+            "com.github.ghik" % s"silencer-lib_$Scala213" % SilencerVersion % Provided
+          )
+        else
+          Seq(
+            ("com.github.ghik" % "silencer-lib" % SilencerVersion % Provided).cross(CrossVersion.full),
+            compilerPlugin(("com.github.ghik" % "silencer-plugin" % SilencerVersion).cross(CrossVersion.full)),
+            compilerPlugin(("org.typelevel" %% "kind-projector" % "0.13.2").cross(CrossVersion.full))
+          )
+      },
+      semanticdbEnabled := scalaVersion.value != Scala3, // enable SemanticDB
+      semanticdbOptions += "-P:semanticdb:synthetics:on",
+      semanticdbVersion := scalafixSemanticdb.revision, // use Scalafix compatible version
+      ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value),
+      ThisBuild / scalafixDependencies ++= List(
+        "com.github.liancheng" %% "organize-imports" % "0.6.0",
+        "com.github.vovapolu" %% "scaluzzi" % "0.1.20"
+      ),
+      Test / parallelExecution := true,
+      incOptions ~= (_.withLogRecompileOnMacro(false)),
+      autoAPIMappings := true,
+      unusedCompileDependenciesFilter -= moduleFilter("org.scala-js", "scalajs-library")
+    )
 
-  /**
-    * Configures generated API documentation website.
-    */
-  def unidocSettings(projects: ProjectReference*) = Seq(
-    // Only include JVM sub-projects, exclude JS or Native sub-projects
-    ScalaUnidoc / unidoc / unidocProjectFilter := inProjects(projects:_*),
+  def welcomeMessage =
+    onLoadMessage := {
+      import scala.Console
 
-    ScalaUnidoc / unidoc / scalacOptions +=
-      "-Xfatal-warnings",
-    ScalaUnidoc / unidoc / scalacOptions --=
-      Seq("-Ywarn-unused-import", "-Ywarn-unused:imports"),
-    ScalaUnidoc / unidoc / scalacOptions ++=
-      Opts.doc.title(projectTitle.value),
-    ScalaUnidoc / unidoc / scalacOptions ++=
-      Opts.doc.sourceUrl(s"https://github.com/${githubFullRepositoryID.value}/tree/v${version.value}€{FILE_PATH}.scala"),
-    ScalaUnidoc / unidoc / scalacOptions ++=
-      Seq("-doc-root-content", file("rootdoc.txt").getAbsolutePath),
-    ScalaUnidoc / unidoc / scalacOptions ++=
-      Opts.doc.version(version.value)
-  )
+      def header(text: String): String = s"${Console.RED}$text${Console.RESET}"
 
-  /**
-    * Settings for `sbt-doctest`, for unit testing ScalaDoc.
-    */
-  def doctestTestSettings(tf: DoctestTestFramework) = Seq(
-    doctestTestFramework := tf,
-    doctestIgnoreRegex := Some(s".*(internal).*"),
-    doctestOnlyCodeBlocksMode := true
-  )
+      def item(text: String): String = s"${Console.GREEN}> ${Console.CYAN}$text${Console.RESET}"
+
+      def subItem(text: String): String = s"  ${Console.YELLOW}> ${Console.CYAN}$text${Console.RESET}"
+
+      s"""|${header(" ________ ___")}
+          |${header("|__  /_ _/ _ \\")}
+          |${header("  / / | | | | |")}
+          |${header(" / /_ | | |_| |")}
+          |${header(s"/____|___\\___/   ${version.value}")}
+          |
+          |Useful sbt tasks:
+          |${item("build")} - Prepares sources, compiles and runs tests.
+          |${item("prepare")} - Prepares sources by applying both scalafix and scalafmt
+          |${item("fix")} - Fixes sources files using scalafix
+          |${item("fmt")} - Formats source files using scalafmt
+          |${item("~compileJVM")} - Compiles all JVM modules (file-watch enabled)
+          |${item("testJVM")} - Runs all JVM tests
+          |${item("testJS")} - Runs all ScalaJS tests
+          |${item("testOnly *.YourSpec -- -t \"YourLabel\"")} - Only runs tests with matching term e.g.
+          |${subItem("coreTestsJVM/testOnly *.ZIOSpec -- -t \"happy-path\"")}
+          |${item("docs/docusaurusCreateSite")} - Generates the ZIO microsite
+        """.stripMargin
+    }
+
+  implicit class ModuleHelper(p: Project) {
+    def module: Project = p.in(file(p.id)).settings(stdSettings(p.id))
+  }
 }
