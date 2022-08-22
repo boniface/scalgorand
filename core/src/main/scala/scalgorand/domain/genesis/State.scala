@@ -20,7 +20,7 @@ package scalgorand.domain.genesis
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class State(
-  algo: Int,
+  algo: Long,
   onl: Int,
   sel: Option[String],
   stprf: Option[String],

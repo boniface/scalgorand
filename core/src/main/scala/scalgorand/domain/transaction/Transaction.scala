@@ -17,6 +17,7 @@
 
 package scalgorand.domain.transaction
 
+import com.algorand.algosdk.crypto.Address
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class Transaction(
@@ -47,7 +48,7 @@ case class Transaction(
   )
 
 object Transaction {
-  private type JsonEntity = Transaction
-  implicit val decoder: JsonDecoder[JsonEntity] = DeriveJsonDecoder.gen[JsonEntity]
-  implicit val encoder: JsonEncoder[JsonEntity] = DeriveJsonEncoder.gen[JsonEntity]
+//  private type JsonEntity = Transaction
+//  implicit val decoder: JsonDecoder[JsonEntity] = DeriveJsonDecoder.gen[JsonEntity]
+//  implicit val encoder: JsonEncoder[JsonEntity] = DeriveJsonEncoder.gen[JsonEntity]
 }
