@@ -38,7 +38,7 @@ case class Transaction(
   xferAssetId: Option[BigInt],
   assetAmount: Option[BigInt],
   assetSender: Option[String],
-  assetReciever: Option[String],
+  assetReceiver: Option[String],
   assetCloseTo: Option[String],
   freezeTarget: Option[String],
   assetFreezeId: Option[String],
