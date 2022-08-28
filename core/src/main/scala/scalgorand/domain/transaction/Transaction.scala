@@ -17,33 +17,35 @@
 
 package scalgorand.domain.transaction
 
-import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
+import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder, jsonField}
 
 case class Transaction(
+  amt: BigInt,
   fee: BigInt,
-  firstRound: BigInt,
-  from: String,
-  fromRewards: BigInt,
-  genesisId: String,
-  genesisHash: Byte,
-  lastRound: BigInt,
-  noteB64: Byte,
-  payment: PaymentTransactionType,
-  poolError: String,
-  round: BigInt,
-  tx: String,
-  createdAssets: BigInt,
-  txtype: String,
-  sender: Option[String],
-  xferAssetId: Option[BigInt],
-  assetAmount: Option[BigInt],
-  assetSender: Option[String],
-  assetReceiver: Option[String],
-  assetCloseTo: Option[String],
-  freezeTarget: Option[String],
-  assetFreezeId: Option[String],
-  assetFreezeState: Option[Boolean],
-  applicationArgs: List[Array[Byte]]
+  fv: BigInt,
+  from: Option[String],
+  fromRewards: Option[BigInt],
+  gen: String,
+  gh: String,
+  lv: BigInt,
+  note: String,
+  payment: Option[PaymentTransactionType],
+  poolError: Option[String],
+  round: Option[BigInt],
+  tx: Option[String],
+  createdAssets: Option[BigInt],
+  @jsonField("type") txtype: String,
+  snd: Option[String],
+  rcv: Option[String],
+  xaid: Option[BigInt],
+  aamt: Option[BigInt],
+  asnd: Option[String],
+  arcv: Option[String],
+  aclose: Option[String],
+  fadd: Option[String],
+  faid: Option[String],
+  afrz: Option[Boolean],
+  apaa: Option[List[Array[Byte]]]
   )
 
 object Transaction {

@@ -20,11 +20,11 @@ package scalgorand.domain.transaction
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class SignedTransaction(
-  tx: Transaction,
+  txn: Transaction,
   sig: Option[String],
   mSig: Option[String],
   lSig: Option[String],
-  authAdd: Option[String]
+  sgnr: Option[String]
 )
 
 object SignedTransaction {

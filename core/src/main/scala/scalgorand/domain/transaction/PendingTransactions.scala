@@ -1,10 +1,10 @@
 package scalgorand.domain.transaction
 
-import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
+import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder, jsonField}
 
 case class PendingTransactions(
-  topTransactions: List[SignedTransaction],
-  totalTransactions: Long
+  @jsonField("top-transactions") topTransactions: List[SignedTransaction],
+  @jsonField("total-transactions") totalTransactions: Long
 )
 
 object PendingTransactions {
