@@ -17,23 +17,23 @@
 
 package scalgorand.domain.node
 
-import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
+import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder, jsonField}
 
 case class Status(
   catchpoint: Option[String],
-  catchPointAcquiredBlocks: Option[Long],
-  catchPointProcessedAccounts: Option[Long],
-  catchPointTotalAccounts: Option[Long],
-  catchPointVerifiedAccounts: Option[Long],
-  catchPointTime: Long,
-  lastCatchPoint: Option[String],
-  lastRound: String,
-  lastVersion: String,
-  nextVersion: String,
-  nextVersionRound: Long,
-  nextVersionSupported: Boolean,
-  stoppedAtUnsupportedRound: Boolean,
-  timeSinceLastRound: Long
+  @jsonField("catchpoint-acquired-blocks") catchPointAcquiredBlocks: Option[Long],
+  @jsonField("catchpoint-processed-accounts") catchPointProcessedAccounts: Option[Long],
+  @jsonField("catchpoint-total-accounts") catchPointTotalAccounts: Option[Long],
+  @jsonField("catchpoint-verified-accounts") catchPointVerifiedAccounts: Option[Long],
+  @jsonField("catchup-time") catchUpTime: Long,
+  @jsonField("last-catchpoint") lastCatchPoint: Option[String],
+  @jsonField("last-round") lastRound: BigInt,
+  @jsonField("last-version") lastVersion: String,
+  @jsonField("next-version") nextVersion: String,
+  @jsonField("next-version-round") nextVersionRound: Long,
+  @jsonField("next-version-supported") nextVersionSupported: Boolean,
+  @jsonField("stopped-at-unsupported-round") stoppedAtUnsupportedRound: Boolean,
+  @jsonField("time-since-last-round") timeSinceLastRound: Long
 )
 
 object Status {

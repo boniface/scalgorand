@@ -1,11 +1,11 @@
 package scalgorand.domain.ledger
 
-import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
+import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder, jsonField}
 
 case class Supply(
-   round: BigInt,
-   onlineMoney: BigInt,
-   totalMoney:BigInt
+   current_round: BigInt,
+   @jsonField("online-money") onlineMoney: BigInt,
+   @jsonField("total-money") totalMoney:BigInt
  )
 
 object Supply {

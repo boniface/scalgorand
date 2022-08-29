@@ -1,0 +1,33 @@
+# curl -X GET "https://testnet-algorand.api.purestake.io/ps2/v2/status" -H "x-api-key:DyUkTm63a99BNgGMs0JDJ2uMFfJypX3Y7LzwyA7p"
+GET https://betanet-algorand.api.purestake.io/ps2/v2/status
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/v2/ledger/supply
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/v2/transactions/params
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/v2/transactions/pending?max=10
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/genesis
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/versions
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/idx2/health
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

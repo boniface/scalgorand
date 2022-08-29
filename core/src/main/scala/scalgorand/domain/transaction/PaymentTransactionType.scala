@@ -6,7 +6,7 @@ case class PaymentTransactionType(
    amount: BigInt,
    close: String,
    closeAmount: BigInt,
-   closerewards: BigInt,
+   closeRewards: BigInt,
    to: String,
    toRewards: BigInt
  )
