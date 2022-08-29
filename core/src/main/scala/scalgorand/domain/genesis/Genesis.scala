@@ -21,7 +21,7 @@ import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class Genesis(
   alloc: List[Allocations],
-  devmode: Boolean,
+  devmode: Option[Boolean],
   fees: String,
   id: String,
   network: String,
