@@ -1,19 +1,17 @@
 package scalgorand.domain.genesis
 
+import scalgorand.domain.genesis.GenesisData.genesisData
 import zio.Scope
-import zio.test.Assertion.equalTo
+import zio.json.DecoderOps
 import zio.test._
-import zio.test.{Spec, TestEnvironment, ZIOSpecDefault, assertTrue}
+
 
 object GenesisSpec extends ZIOSpecDefault {
   override def spec: Spec[TestEnvironment with Scope, Any] =
-    test("Genesis Test"){
-      val sum = 1 +2
-      assertTrue(sum == 3)
-    } +
-    test("Genesis Test2"){
-      val sum = 1 +2
-      assertTrue(sum == 3)
+    test("Test Genesis Serialisation"){
+       val decoded = genesisData.fromJson[Genesis]
+      assertTrue(decoded.isRight)
     }
+
 
 }

@@ -21,7 +21,7 @@ import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class State(
   algo: Long,
-  onl: Int,
+  onl: Option[Int],
   sel: Option[String],
   stprf: Option[String],
   vote: Option[String],
