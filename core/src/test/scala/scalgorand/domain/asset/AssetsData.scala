@@ -1,7 +1,7 @@
 package scalgorand.domain.asset
 
 object AssetsData {
-  val assetsData =
+  val assetsData: String =
     """
       |{
       |  "assets": [
@@ -45,7 +45,7 @@ object AssetsData {
       |}
       |""".stripMargin
 
-  val assetData =
+  val assetData: String =
     """
       |{
       |  "index": 185,

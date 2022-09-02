@@ -1,7 +1,7 @@
 package scalgorand.domain.node
 
 object StatusData {
-  val statusData =
+  val statusData: String =
     """
       |{
       |  "catchpoint": "",

@@ -1,7 +1,7 @@
 package scalgorand.domain.node
 
 object BlockData {
-  val blockData =
+  val blockData: String =
     """
       |{
       |    "earn": 24,

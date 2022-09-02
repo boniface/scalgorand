@@ -1,7 +1,7 @@
 package scalgorand.domain.transaction
 
 object PendingTransactionsData {
-  val pendingTransactions =
+  val pendingTransactions: String =
     """
       |{
       |  "top-transactions": [
