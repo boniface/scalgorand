@@ -22,8 +22,8 @@ object Boilerplate {
       val init = vs.take(vs(0) match { case "2" => 2; case _ => 1 }); (init.mkString("."), v)
     }.toMap
   }
-  val Scala211: String = versions("2.11")
-  val Scala212: String = versions("2.12")
+//  val Scala211: String = versions("2.11")
+//  val Scala212: String = versions("2.12")
   val Scala213: String = versions("2.13")
   val Scala3: String = versions("3")
 
@@ -169,8 +169,8 @@ object Boilerplate {
 
   def crossPlatformSources(scalaVer: String, platform: String, conf: String, baseDir: File) = {
     val versions = CrossVersion.partialVersion(scalaVer) match {
-      case Some((2, 11)) =>
-        List("2.11+", "2.11-2.12")
+//      case Some((2, 11)) =>
+//        List("2.11+", "2.11-2.12")
       case Some((2, 12)) =>
         List("2.11+", "2.12+", "2.11-2.12", "2.12-2.13")
       case Some((2, 13)) =>
@@ -186,7 +186,7 @@ object Boilerplate {
   def stdSettings(prjName: String) =
     Seq(
       name := s"$prjName",
-      crossScalaVersions := Seq(Scala211, Scala212, Scala213),
+      crossScalaVersions := Seq(Scala213),
       ThisBuild / scalaVersion := Scala213,
       scalacOptions := stdOptions ++ extraOptions(scalaVersion.value, optimize = !isSnapshot.value),
       libraryDependencies ++= {
