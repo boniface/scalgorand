@@ -65,4 +65,30 @@ object AssetsData {
       |  }
       |}
       |""".stripMargin
+
+  val purstakeExample: String =
+    """
+      |{
+      |  "asset": {
+      |    "index": 0,
+      |    "params": {
+      |      "creator": "string",
+      |      "unit-name": "string",
+      |      "manager": "string",
+      |      "metadata-hash": "string",
+      |      "url-b64": "string",
+      |      "url": "string",
+      |      "clawback": "string",
+      |      "default-frozen": true,
+      |      "unit-name-b64": "string",
+      |      "total": 0,
+      |      "freeze": "string",
+      |      "decimals": 19,
+      |      "name": "string",
+      |      "reserve": "string",
+      |      "name-b64": "string"
+      |    }
+      |  }
+      |}
+      |""".stripMargin
 }
