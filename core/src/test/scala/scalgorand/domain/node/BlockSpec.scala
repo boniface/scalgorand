@@ -1,14 +1,14 @@
 package scalgorand.domain.node
 
-import scalgorand.domain.node.StatusData.statusData
+import scalgorand.domain.node.BlockData.blockData
 import zio.Scope
 import zio.json.DecoderOps
 import zio.test.{Spec, TestEnvironment, ZIOSpecDefault, assertTrue}
 
-object StatusSpec extends ZIOSpecDefault {
+object BlockSpec extends ZIOSpecDefault {
   override def spec: Spec[TestEnvironment with Scope, Any] =
-    test("Test for Status Serialization") {
-      val decoded = statusData.fromJson[Status]
+    test("Test for Block Serialization") {
+      val decoded = blockData.fromJson[Block]
       assertTrue(decoded.isRight)
     }
 }

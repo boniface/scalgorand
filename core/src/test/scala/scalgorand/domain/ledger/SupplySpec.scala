@@ -6,7 +6,7 @@ import zio.test.{Spec, TestEnvironment, ZIOSpecDefault, assertTrue}
 
 object SupplySpec extends ZIOSpecDefault {
   override def spec: Spec[TestEnvironment with Scope, Any] =
-    test("Test1") {
+    test("Test for supply Serialization") {
       val supplyData =
         """
           |{

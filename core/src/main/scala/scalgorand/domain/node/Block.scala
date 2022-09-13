@@ -4,24 +4,28 @@ import scalgorand.domain.transaction.Transaction
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class Block(
-  currentProtocol: String,
+  earn: Int,
+  fees: String,
+  proto: String,
   frac: BigInt,
-  hash: String,
-  nextProtocol: String,
-  nextProtocolApprovals: BigInt,
-  nextProtocolSwitchOn: BigInt,
-  nextProtocolBefore: BigInt,
-  period: BigInt,
-  previousHash: String,
-  prosper: String,
-  rate: BigInt,
-  reward: BigInt,
-  round: BigInt,
-  seed: BigInt,
-  timestamp: BigInt,
-  txns: List[Transaction],
-  upgradeApprove: Boolean,
-  upgradePropose: String
+  nextproto: String,
+  gen: String,
+  gh: String,
+  nextyes: BigInt,
+  nextswitch: BigInt,
+  nextbefore: BigInt,
+  period: Option[BigInt],
+  prev: String,
+  prosper: Option[String],
+  rate: Option[BigInt],
+  rwd: Option[String],
+  rwcalr: Option[BigInt],
+  rnd: BigInt,
+  seed: String,
+  ts: BigInt,
+  txns: Option[List[Transaction]],
+  upgradeyes: Boolean,
+  upgradepropose: Option[String]
   )
 
 object Block {
