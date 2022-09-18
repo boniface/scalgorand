@@ -1,11 +1,11 @@
 package scalgorand.domain.accounts
 
-import scalgorand.domain.asset.{AssetParams, MiniAssetHolding}
-import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
+import scalgorand.domain.asset.AssetParams
+import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder, jsonField}
 
 case class AccountAsset (
-  assetHolding: Option[MiniAssetHolding],
-  createdAsset: Option[AssetParams],
+  @jsonField("asset-holding") assetHolding: Option[AssetHolding],
+  @jsonField("created-asset") createdAsset: Option[AssetParams],
   round: Int
 )
 
