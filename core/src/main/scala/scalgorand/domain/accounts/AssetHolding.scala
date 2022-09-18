@@ -11,5 +11,5 @@ case class AssetHolding(
 object AssetHolding {
   private type JsonEntity = AssetHolding
   implicit val decoder: JsonDecoder[JsonEntity] = DeriveJsonDecoder.gen[JsonEntity]
-  implicit val encodeR: JsonEncoder[JsonEntity] = DeriveJsonEncoder.gen[JsonEntity]
+  implicit val encoder: JsonEncoder[JsonEntity] = DeriveJsonEncoder.gen[JsonEntity]
 }
