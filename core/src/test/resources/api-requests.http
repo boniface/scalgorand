@@ -1,33 +1,138 @@
-# curl -X GET "https://testnet-algorand.api.purestake.io/ps2/v2/status" -H "x-api-key:DyUkTm63a99BNgGMs0JDJ2uMFfJypX3Y7LzwyA7p"
 GET https://betanet-algorand.api.purestake.io/ps2/v2/status
 x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ###
 
 GET https://betanet-algorand.api.purestake.io/ps2/v2/ledger/supply
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ###
 
 GET https://betanet-algorand.api.purestake.io/ps2/v2/transactions/params
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ###
 
-GET https://betanet-algorand.api.purestake.io/ps2/v2/transactions/pending?max=10
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+GET https://testnet-algorand.api.purestake.io/ps2/v2/transactions/pending?max=2
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/ps2/v2/accounts/BFO7NQTTXGYDPUEWJYLWPFZRUFQISHY4E2SKXARM7UROMAW36YYBGPSUYY/transactions/pending
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ###
 
 GET https://betanet-algorand.api.purestake.io/ps2/genesis
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ###
 
 GET https://betanet-algorand.api.purestake.io/ps2/versions
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 ###
 
 GET https://betanet-algorand.api.purestake.io/idx2/health
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/idx2/v2/accounts/AAMA45IEUSR7J74JIE3SGPR7K3BZFWACNK4UPKWVAN2ONONCXJBZ65ZE6Q
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/v2/applications/2
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/idx2/v2/assets?limit=2
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/ps2/v2/assets/185
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/ps2/v2/blocks/1000
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/idx2/v2/applications?limit=3
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/v2/transactions/params
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/ps2/versions
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/idx2/v2/assets/185/balances?limit=3
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/ps2/v2/accounts/AAAEMWDLX7TCWMENVAO4XYZUEUO5NESMCRZP6SIUWGRUZTAFBMBG2IMD2E/assets/14947321
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/ps2/v2/accounts/AAAFTDBBWCEVMS5IVB3O4DBR3GZ7L7HY6PDO7O2E74OTTRZQYGIVTP5XHY/applications/67266758
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://betanet-algorand.api.purestake.io/idx2/v2/accounts?limit=10
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

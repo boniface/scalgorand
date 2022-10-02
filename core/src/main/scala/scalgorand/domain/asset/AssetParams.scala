@@ -12,7 +12,7 @@ case class AssetParams(
                       name: Option[String],
                       @jsonField("name-b64") nameB64: Option[String],
                       reserve: Option[String],
-                      total: Option[Int],
+                      total: Option[BigInt],
                       @jsonField("unit-name") unitName: Option[String],
                       @jsonField("unit-nameb64") unitNameB64: Option[String],
                       url: Option[String],
