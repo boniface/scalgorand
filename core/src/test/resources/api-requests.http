@@ -37,6 +37,15 @@ x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 GET https://betanet-algorand.api.purestake.io/idx2/health
 x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
+###
+
+GET https://testnet-algorand.api.purestake.io/idx2/v2/accounts/AAMA45IEUSR7J74JIE3SGPR7K3BZFWACNK4UPKWVAN2ONONCXJBZ65ZE6Q
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+
 
 ###
 
