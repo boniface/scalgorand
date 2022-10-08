@@ -5,7 +5,7 @@ import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder,
 case class Applications (
   applications: List[Application],
   @jsonField("current-round") currentRound: BigInt,
-  @jsonField("next-token") nextToken: BigInt
+  @jsonField("next-token") nextToken: String
 )
 
 object Applications {
