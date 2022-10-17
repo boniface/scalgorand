@@ -1,7 +1,7 @@
 @protocol = https
 @betanet_hostname = betanet-algorand.api.purestake.io
 @testnet_hostname = testnet-algorand.api.purestake.io
-@apikey =  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+@apikey =  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 @betanet_host = {{protocol}}://{{betanet_hostname}}
 @testnet_host = {{protocol}}://{{testnet_hostname}} 
 @content_type = application/json
@@ -58,10 +58,6 @@ x-api-key: {{apikey}}
 GET {{testnet_host}}/idx2/v2/accounts/AAMA45IEUSR7J74JIE3SGPR7K3BZFWACNK4UPKWVAN2ONONCXJBZ65ZE6Q
 accept: {{content_type}}
 x-api-key: {{apikey}}
-
-###
-
-
 
 ###
 
@@ -131,53 +127,41 @@ x-api-key: {{apikey}}
 
 ###
 
-GET https://testnet-algorand.api.purestake.io/idx2/health
-accept: application/json
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+GET {{testnet_host}}/idx2/health
+accept: {{content_type}}
+x-api-key: {{apikey}}
 
 ###
 
-GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions?sig-type=sig&limit=3
-accept: application/json
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+GET {{testnet_host}}/idx2/v2/transactions?sig-type=sig&limit=3
+accept: {{content_type}}
+x-api-key: {{apikey}}
 
 ###
 
-GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions?limit=5
-accept: application/json
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+GET {{testnet_host}}/idx2/v2/transactions?limit=5
+accept: {{content_type}}
+x-api-key: {{apikey}}
 
 ###
 
-GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions/QOOBRVQMX4HW5QZ2EGLQDQCQTKRF3UP3JKDGKYPCXMI6AVV35KQA
-accept: application/json
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+GET {{testnet_host}}/idx2/v2/transactions/QOOBRVQMX4HW5QZ2EGLQDQCQTKRF3UP3JKDGKYPCXMI6AVV35KQA
+accept: {{content_type}}
+x-api-key: {{apikey}}
 
 ###
 
-GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions?tx-type=axfer&limit=5
-accept: application/json
-x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+GET {{testnet_host}}/idx2/v2/transactions?tx-type=axfer&limit=5
+accept: {{content_type}}
+x-api-key: {{apikey}}
 
 ###
-
-
-
-
-
-
-
-
-
 
 GET {{betanet_host}}/idx2/v2/accounts?limit=10
 accept: {{content_type}}
 x-api-key: {{apikey}}
 
 ###
-
-
-
 
 GET {{testnet_host}}/ps2/v2/blocks/41907177?format=json
 accept: {{content_type}}
