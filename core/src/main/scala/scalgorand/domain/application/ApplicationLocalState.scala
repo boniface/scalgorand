@@ -5,7 +5,10 @@ import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder,
 case class ApplicationLocalState(
   id: Int,
   schema: ApplicationStateSchema,
-  @jsonField("key-value") keyValue: List[TealKeyValue]
+  deleted: Option[Boolean],
+  @jsonField("key-value") keyValue: List[TealKeyValue],
+  @jsonField("opted-in-at-round") optedInAtRound: Option[Int],
+  @jsonField("closed-out-at-round") closedOutAtRound: Option[Int]
 )
 
 object ApplicationLocalState {
