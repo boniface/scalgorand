@@ -131,6 +131,44 @@ x-api-key: {{apikey}}
 
 ###
 
+GET https://testnet-algorand.api.purestake.io/idx2/health
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions?sig-type=sig&limit=3
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions?limit=5
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions/QOOBRVQMX4HW5QZ2EGLQDQCQTKRF3UP3JKDGKYPCXMI6AVV35KQA
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+GET https://testnet-algorand.api.purestake.io/idx2/v2/transactions?tx-type=axfer&limit=5
+accept: application/json
+x-api-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+###
+
+
+
+
+
+
+
+
+
 
 GET {{betanet_host}}/idx2/v2/accounts?limit=10
 accept: {{content_type}}
