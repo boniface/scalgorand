@@ -6,7 +6,7 @@ case class TransactionSignatureLogicsig (
   args: Option[List[String]],
   logic: String,
   signature: Option[String],
-  @jsonField("multisig-signature") multisigSignature: TransactionSignatureMultisig
+  @jsonField("multisig-signature") multisigSignature: Option[TransactionSignatureMultisig]
 )
 
 object TransactionSignatureLogicsig {

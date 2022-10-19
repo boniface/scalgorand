@@ -3,8 +3,8 @@ import scalgorand.domain.application.ApplicationStateSchema
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder, jsonField}
 
 case class TransactionApplication(
-  account: Option[String],
-  @jsonField("application-args") applicationArgs: Option[String],
+  accounts: Option[List[String]],
+  @jsonField("application-args") applicationArgs: Option[List[String]],
   @jsonField("application-id") applicationId: Int,
   @jsonField("approval-program") approvalProgram: Option[String],
   @jsonField("clear-state-program") clearStateProgram: Option[String],
@@ -13,7 +13,7 @@ case class TransactionApplication(
   @jsonField("foreign-assets") foreignAssets: Option[List[Int]],
   @jsonField("global-state-schema") globalStateSchema: Option[ApplicationStateSchema],
   @jsonField("local-state-schema") localStateSchema: Option[ApplicationStateSchema],
-  @jsonField("on-completion") onCompletion: OnCompletion
+  @jsonField("on-completion") onCompletion: String//OnCompletion
 )
 
 object TransactionApplication {

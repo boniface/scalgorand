@@ -176,8 +176,11 @@ x-api-key: {{apikey}}
 ###
 
 
+GET {{testnet_host}}/idx2/v2/accounts/AAAFTDBBWCEVMS5IVB3O4DBR3GZ7L7HY6PDO7O2E74OTTRZQYGIVTP5XHY/transactions
+accept: {{content_type}}
+x-api-key: {{apikey}}
 
-
+###
 
 
 
