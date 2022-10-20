@@ -1,7 +1,7 @@
 @protocol = https
 @betanet_hostname = betanet-algorand.api.purestake.io
 @testnet_hostname = testnet-algorand.api.purestake.io
-@apikey =  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+@apikey =  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 @betanet_host = {{protocol}}://{{betanet_hostname}}
 @testnet_host = {{protocol}}://{{testnet_hostname}} 
 @content_type = application/json
@@ -182,13 +182,19 @@ x-api-key: {{apikey}}
 
 ###
 
+GET {{testnet_host}}/idx2/v2/applications/12191587/logs
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
 
 
+GET {{testnet_host}}/idx2/v2/assets/185/transactions
+accept: {{content_type}}
+x-api-key: {{apikey}}
 
 
-
-
-
+###
 
 
 
