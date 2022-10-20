@@ -197,4 +197,7 @@ x-api-key: {{apikey}}
 ###
 
 
+GET {{testnet_host}}/idx2/health
+x-api-key: {{apikey}}
 
+###
