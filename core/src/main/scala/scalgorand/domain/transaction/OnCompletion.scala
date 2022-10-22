@@ -2,8 +2,8 @@ package scalgorand.domain.transaction
 
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
-case class OnCompletion(
-  noop:String,
+case class  OnCompletion(
+  noop: String,
   optin: String,
   closeout: String,
   clear: String,

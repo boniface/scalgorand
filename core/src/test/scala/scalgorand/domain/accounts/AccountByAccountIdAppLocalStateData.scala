@@ -1,8 +1,8 @@
 package scalgorand.domain.accounts
 
-object AccountByAccountIdAppLocalStateData {
+object AccountByAccountIdAccountApplicationLocalStateData {
 
-  val accountByAccountIdAppLocalStateData: String =
+  val accountByAccountIdAccountApplicationLocalState: String =
     """
       |{
       |"apps-local-states": [

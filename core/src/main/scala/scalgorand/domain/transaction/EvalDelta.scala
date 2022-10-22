@@ -21,8 +21,8 @@ import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 case class EvalDelta(
   action: Long,
-  bytes: String,
-  uint: BigInt
+  bytes: Option[String],
+  uint: Option[BigInt]
 )
 
 object EvalDelta {
