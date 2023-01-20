@@ -201,3 +201,8 @@ GET {{testnet_host}}/idx2/health
 x-api-key: {{apikey}}
 
 ###
+
+GET {{testnet_host}}/ps2/v2/status/wait-for-block-after/1000
+x-api-key: {{apikey}}
+
+###
