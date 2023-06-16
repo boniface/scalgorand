@@ -19,3 +19,6 @@ project/metals.sbt
 .bsp
 site/Gemfile.lock
 node_modules/
+.vscode/settings.json
+project/project/metals.sbt
+project/project/project/metals.sbt

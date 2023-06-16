@@ -1,0 +1,208 @@
+@protocol = https
+@betanet_hostname = betanet-algorand.api.purestake.io
+@testnet_hostname = testnet-algorand.api.purestake.io
+@apikey =  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+@betanet_host = {{protocol}}://{{betanet_hostname}}
+@testnet_host = {{protocol}}://{{testnet_hostname}} 
+@content_type = application/json
+
+
+
+
+
+
+GET {{betanet_host}}/ps2/v2/status
+x-api-key: {{apikey}}
+###
+GET {{testnet_host}}/ps2/health
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/ps2/v2/ledger/supply
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/ps2/v2/transactions/params
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/transactions/pending?max=2
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/accounts/BFO7NQTTXGYDPUEWJYLWPFZRUFQISHY4E2SKXARM7UROMAW36YYBGPSUYY/transactions/pending
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/ps2/genesis
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/ps2/versions
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/idx2/health
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/accounts/AAMA45IEUSR7J74JIE3SGPR7K3BZFWACNK4UPKWVAN2ONONCXJBZ65ZE6Q
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/ps2/v2/applications/2
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/idx2/v2/assets?limit=2
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/assets/185
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/blocks/1000
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/idx2/v2/applications?limit=3
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/ps2/v2/transactions/params
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/ps2/versions
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/assets/185/balances?limit=3
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/accounts/AAAEMWDLX7TCWMENVAO4XYZUEUO5NESMCRZP6SIUWGRUZTAFBMBG2IMD2E/assets/14947321
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/accounts/AAAFTDBBWCEVMS5IVB3O4DBR3GZ7L7HY6PDO7O2E74OTTRZQYGIVTP5XHY/applications/67266758
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/idx2/v2/accounts?limit=10
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/health
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/transactions?sig-type=sig&limit=3
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/transactions?limit=5
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/transactions/QOOBRVQMX4HW5QZ2EGLQDQCQTKRF3UP3JKDGKYPCXMI6AVV35KQA
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/transactions?tx-type=axfer&limit=5
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{betanet_host}}/idx2/v2/accounts?limit=10
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/blocks/41907177?format=json
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/accounts/AAAFTDBBWCEVMS5IVB3O4DBR3GZ7L7HY6PDO7O2E74OTTRZQYGIVTP5XHY/apps-local-state
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+
+GET {{testnet_host}}/idx2/v2/accounts/AAAFTDBBWCEVMS5IVB3O4DBR3GZ7L7HY6PDO7O2E74OTTRZQYGIVTP5XHY/transactions
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/idx2/v2/applications/12191587/logs
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+###
+
+
+GET {{testnet_host}}/idx2/v2/assets/185/transactions
+accept: {{content_type}}
+x-api-key: {{apikey}}
+
+
+###
+
+
+GET {{testnet_host}}/idx2/health
+x-api-key: {{apikey}}
+
+###
+
+GET {{testnet_host}}/ps2/v2/status/wait-for-block-after/1000
+x-api-key: {{apikey}}
+
+###

@@ -49,7 +49,7 @@ object Dependencies {
   }
 
   object AlgoSDKWrapper {
-    private val algoSDKVersion = "1.16.0"
+    private val algoSDKVersion = "1.17.0"
     val algoSDK                = "com.algorand" % "algosdk" % algoSDKVersion
     val all: Seq[ModuleID]     = Seq(algoSDK)
   }
